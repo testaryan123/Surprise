@@ -1,0 +1,311 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --midnight: #020008;
+    --deep-violet: #1a0533;
+    --electric-rose: #ff2d78;
+    --gold: #e2a84b;
+    --ice-blue: #a8d8ff;
+    --rose-gold: linear-gradient(135deg, #ff2d78, #e2a84b);
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  body {
+    background-color: var(--midnight);
+    font-family: 'DM Sans', sans-serif;
+    color: #f0e6ff;
+    overflow-x: hidden;
+  }
+
+  ::selection {
+    background: rgba(255, 45, 120, 0.3);
+    color: #fff;
+  }
+
+  ::-webkit-scrollbar {
+    width: 4px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #020008;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: linear-gradient(#ff2d78, #e2a84b);
+    border-radius: 2px;
+  }
+}
+
+/* ── Typography ── */
+.font-serif { font-family: 'Playfair Display', serif; }
+.font-handwritten { font-family: 'Dancing Script', cursive; }
+.font-sans { font-family: 'DM Sans', sans-serif; }
+
+/* ── Glow effects ── */
+.glow-rose {
+  text-shadow: 0 0 20px rgba(255, 45, 120, 0.8), 0 0 60px rgba(255, 45, 120, 0.4), 0 0 100px rgba(255, 45, 120, 0.2);
+}
+.glow-gold {
+  text-shadow: 0 0 20px rgba(226, 168, 75, 0.8), 0 0 60px rgba(226, 168, 75, 0.4);
+}
+.glow-ice {
+  text-shadow: 0 0 20px rgba(168, 216, 255, 0.8), 0 0 40px rgba(168, 216, 255, 0.4);
+}
+
+/* ── Gradient text ── */
+.text-rose-gold {
+  background: linear-gradient(135deg, #ff2d78 0%, #e2a84b 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ── Section base ── */
+section {
+  position: relative;
+  width: 100%;
+}
+
+/* ── Loading Screen ── */
+.loading-screen {
+  position: fixed;
+  inset: 0;
+  background: #020008;
+  z-index: 10000;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+}
+
+.loading-bar-track {
+  width: 280px;
+  height: 2px;
+  background: rgba(255,255,255,0.08);
+  border-radius: 99px;
+  overflow: hidden;
+}
+.loading-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #ff2d78, #e2a84b);
+  border-radius: 99px;
+  transition: width 0.1s ease;
+}
+
+/* ── Canvas containers ── */
+.canvas-full {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* ── Polaroid cards ── */
+.polaroid {
+  background: #f5f0e8;
+  padding: 10px 10px 40px 10px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.6), 0 2px 8px rgba(0,0,0,0.4);
+}
+.polaroid img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  display: block;
+}
+.polaroid-caption {
+  font-family: 'Dancing Script', cursive;
+  color: #2a1a0a;
+  font-size: 0.85rem;
+  text-align: center;
+  margin-top: 8px;
+}
+
+/* ── Flip cards ── */
+.flip-card {
+  perspective: 1000px;
+  cursor: pointer;
+}
+.flip-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.7s cubic-bezier(0.4,0,0.2,1);
+  transform-style: preserve-3d;
+}
+.flip-card.flipped .flip-card-inner {
+  transform: rotateY(180deg);
+}
+.flip-card-front,
+.flip-card-back {
+  position: absolute;
+  inset: 0;
+  backface-visibility: hidden;
+  border-radius: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+}
+.flip-card-back {
+  transform: rotateY(180deg);
+}
+
+/* ── Scroll chevron ── */
+@keyframes bounce-down {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(10px); }
+}
+.scroll-chevron {
+  animation: bounce-down 2s ease-in-out infinite;
+}
+
+/* ── Rose petals ── */
+@keyframes petal-fall {
+  0% { transform: translateY(-10vh) rotate(0deg) translateX(0); opacity: 1; }
+  100% { transform: translateY(110vh) rotate(720deg) translateX(var(--drift)); opacity: 0; }
+}
+.petal {
+  position: fixed;
+  pointer-events: none;
+  animation: petal-fall var(--duration) ease-in forwards;
+  animation-delay: var(--delay);
+  z-index: 10001;
+}
+
+/* ── Letter section ── */
+.wax-seal {
+  filter: drop-shadow(0 0 20px rgba(255, 45, 120, 0.6));
+}
+
+/* ── Nebula background ── */
+.nebula-bg {
+  background: radial-gradient(ellipse at 20% 50%, rgba(26, 5, 51, 0.8) 0%, transparent 60%),
+              radial-gradient(ellipse at 80% 20%, rgba(255, 45, 120, 0.1) 0%, transparent 50%),
+              radial-gradient(ellipse at 50% 80%, rgba(168, 216, 255, 0.05) 0%, transparent 60%),
+              #020008;
+}
+
+/* ── Glassmorphism ── */
+.glass {
+  background: rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* ── Ambient bubbles ── */
+@keyframes float-up {
+  0% { transform: translateY(0) scale(1); opacity: 0.6; }
+  100% { transform: translateY(-200px) scale(1.3); opacity: 0; }
+}
+.bubble {
+  animation: float-up var(--duration) ease-in-out infinite;
+  animation-delay: var(--delay);
+}
+
+/* ── Custom cursor ── */
+.cursor-dot {
+  width: 8px;
+  height: 8px;
+  background: #ff2d78;
+  border-radius: 50%;
+  position: fixed;
+  pointer-events: none;
+  z-index: 99999;
+  transform: translate(-50%, -50%);
+  box-shadow: 0 0 12px #ff2d78, 0 0 24px rgba(255,45,120,0.6);
+}
+.cursor-ring {
+  width: 36px;
+  height: 36px;
+  border: 1.5px solid rgba(255, 45, 120, 0.5);
+  border-radius: 50%;
+  position: fixed;
+  pointer-events: none;
+  z-index: 99998;
+  transform: translate(-50%, -50%);
+  transition: transform 0.12s ease, width 0.2s ease, height 0.2s ease;
+}
+.cursor-trail {
+  position: fixed;
+  pointer-events: none;
+  z-index: 99997;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/* ── Timeline horizontal scroll ── */
+.timeline-track {
+  display: flex;
+  gap: 2rem;
+  padding: 2rem 4rem;
+  will-change: transform;
+}
+
+/* ── Progress bar ── */
+.progress-bar {
+  height: 2px;
+  background: linear-gradient(90deg, #ff2d78, #e2a84b);
+  transform-origin: left;
+}
+
+/* ── Parchment texture ── */
+.parchment {
+  background:
+    radial-gradient(ellipse at 30% 40%, rgba(226, 168, 75, 0.06) 0%, transparent 60%),
+    radial-gradient(ellipse at 70% 70%, rgba(255, 45, 120, 0.04) 0%, transparent 50%),
+    linear-gradient(180deg, #0d0318 0%, #1a0533 50%, #0d0318 100%);
+}
+
+/* ── Star glow pulse ── */
+@keyframes star-pulse {
+  0%, 100% { opacity: 0.7; }
+  50% { opacity: 1; }
+}
+
+/* ── Floating animation ── */
+@keyframes float-gentle {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  33% { transform: translateY(-12px) rotate(1deg); }
+  66% { transform: translateY(6px) rotate(-1deg); }
+}
+.float-gentle {
+  animation: float-gentle 6s ease-in-out infinite;
+}
+
+/* ── Easter egg overlay ── */
+.easter-egg-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 10002;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: rgba(2, 0, 8, 0.92);
+  backdrop-filter: blur(8px);
+}
+
+/* ── Responsive ── */
+@media (max-width: 768px) {
+  .timeline-track {
+    padding: 2rem 1.5rem;
+    gap: 1.5rem;
+  }
+  .polaroid img {
+    height: 140px;
+  }
+}
+
+/* ── Reduced motion ── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+  body::after { display: none; }
+}
