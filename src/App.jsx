@@ -10,6 +10,7 @@ import CinematicTimeline from './components/CinematicTimeline'
 import FloatingObjects from './components/FloatingObjects'
 import EasterEgg from './components/EasterEgg'
 import MessageInABottle from './components/MessageInABottle'
+import CarePackage from './components/CarePackage'
 
 // Navigation dots
 function NavDots({ sections, activeSection }) {
@@ -167,6 +168,7 @@ export default function App() {
           <GlobalProgressBar />
           <NavDots sections={SECTION_IDS} activeSection={activeSection} />
           <EasterEgg onTitleTap={titleTapCount} />
+          <CarePackage />
 
           <main>
             {/* Section 1 */}
