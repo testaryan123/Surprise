@@ -11,11 +11,14 @@ import FloatingObjects from './components/FloatingObjects'
 import EasterEgg from './components/EasterEgg'
 import MessageInABottle from './components/MessageInABottle'
 import CarePackage from './components/CarePackage'
+import MemoryJar from './components/MemoryJar'
+import LovePuzzle from './components/LovePuzzle'
+import OurGallery from './components/OurGallery'
 
 // Navigation dots
 function NavDots({ sections, activeSection }) {
-  const labels = ['✦', '◎', '◈', '◇', '✉']
-  const tooltips = ['Entrance', 'Constellation', 'Timeline', 'Reasons', 'Letter']
+  const labels = ['✦', '◎', '◈', '◇', '✉', '✨', '🧩', '📸']
+  const tooltips = ['Entrance', 'Constellation', 'Timeline', 'Reasons', 'Letter', 'Memory Jar', 'Love Puzzle', 'Our Gallery']
 
   return (
     <div style={{
@@ -91,7 +94,7 @@ function GlobalProgressBar() {
   )
 }
 
-const SECTION_IDS = ['landing', 'constellation', 'timeline', 'reasons', 'letter']
+const SECTION_IDS = ['landing', 'constellation', 'timeline', 'reasons', 'letter', 'memory-jar', 'love-puzzle', 'our-gallery']
 
 export default function App() {
   const [loaded, setLoaded] = useState(false)
@@ -210,6 +213,33 @@ export default function App() {
 
             {/* Section 6 */}
             <MessageInABottle />
+
+            {/* Transition */}
+            <div style={{
+              height: 120,
+              background: 'linear-gradient(180deg, #020008 0%, #0a0210 100%)',
+            }} />
+
+            {/* Section 7 */}
+            <MemoryJar />
+
+            {/* Transition */}
+            <div style={{
+              height: 120,
+              background: 'linear-gradient(180deg, #020008 0%, #07010f 100%)',
+            }} />
+
+            {/* Section 8 */}
+            <LovePuzzle />
+
+            {/* Transition */}
+            <div style={{
+              height: 120,
+              background: 'linear-gradient(180deg, #020008 0%, #060012 100%)',
+            }} />
+
+            {/* Section 9 — Photo & Video Gallery */}
+            <OurGallery />
           </main>
 
           {/* Footer */}
